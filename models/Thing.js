@@ -5,11 +5,14 @@ class Thing {
     body: 'string',
   };
 
-  static async create (values) {
-    const insertAttrs = Object.entries(this.attributes)
+  static _filterValues (values) {
+    return Object.entries(this.attributes)
       .filter(([attr]) => attr in values)
       .map(([attr]) => attr);
+  }
 
+  static async create (values) {
+    const insertAttrs = this._filterValues(values);
     const insertSchemaStr = insertAttrs.map(attr => `"${attr}"`).join(',');
     const insertValuesStr = insertAttrs
       .map(attr => {
@@ -31,9 +34,7 @@ class Thing {
   }
 
   static async updateByPk (pkValue, values) {
-    const insertAttrs = Object.entries(this.attributes)
-      .filter(([attr]) => attr in values)
-      .map(([attr]) => attr);
+    const insertAttrs = this._filterValues(values);
 
     const updateSchemaStr = insertAttrs
       .map(attr => {
