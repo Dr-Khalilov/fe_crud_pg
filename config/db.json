@@ -3,14 +3,14 @@
     "user": "postgres",
     "password": "postgres",
     "host": "localhost",
-    "database": "fe_things",
+    "database": "app_test",
     "port": 5432
   },
   "test": {
     "user": "postgres",
     "password": "postgres",
     "host": "localhost",
-    "database": "fe_things_test",
+    "database": "app_test",
     "port": 5432
   },
   "production": {}
